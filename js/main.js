@@ -11,7 +11,7 @@ const form = document.getElementById("converter-form");
 const historialSection = document.getElementById("historial-section");
 
 // Array para almacenar el historial de conversiones
-const conversionHistory = [];
+let conversionHistory = [];
 
 // Función para realizar la conversión de ARS a USD
 function convertARSToUSD(amountARS) {
@@ -30,11 +30,26 @@ function updateResult(result) {
     montoAInput.value = result;
 }
 
-// Función para agregar una conversión al historial
-function addToHistory(conversion) {
+// Función para agregar una conversión al historial y almacenarla en localStorage
+function addToHistoryAndLocalStorage(conversion) {
+    conversionHistory.push(conversion);
+    localStorage.setItem('conversionHistory', JSON.stringify(conversionHistory));
     const historyItem = document.createElement("p");
     historyItem.textContent = conversion;
     historialSection.appendChild(historyItem);
+}
+
+// Función para cargar el historial de conversiones desde localStorage al cargar la página
+function loadConversionHistoryFromLocalStorage() {
+    const storedHistory = localStorage.getItem('conversionHistory');
+    if (storedHistory) {
+        conversionHistory = JSON.parse(storedHistory);
+        conversionHistory.forEach(conversion => {
+            const historyItem = document.createElement("p");
+            historyItem.textContent = conversion;
+            historialSection.appendChild(historyItem);
+        });
+    }
 }
 
 // Función para intercambiar las monedas seleccionadas
@@ -47,10 +62,11 @@ function swapCurrencies() {
     moneda2.value = tempValue;
 }
 
-// Función para borrar el historial de conversiones
+// Función para borrar el historial de conversiones y removerlo de localStorage
 function clearConversionHistory() {
     historialSection.innerHTML = ""; // Limpiar el contenido del elemento
-    conversionHistory.length = 0; // Vaciar el array
+    conversionHistory = []; // Vaciar el array
+    localStorage.removeItem('conversionHistory');
 }
 
 // Referencia al botón de borrar historial
@@ -59,10 +75,12 @@ const clearButton = document.getElementById("clear-history");
 // Evento para el botón de borrar historial
 clearButton.addEventListener("click", clearConversionHistory);
 
-
 // Evento para el botón de intercambio
 const swapButton = document.getElementById("swap-button");
 swapButton.addEventListener("click", swapCurrencies);
+
+// Al cargar la página, cargar el historial de conversiones desde localStorage
+window.addEventListener("load", loadConversionHistoryFromLocalStorage);
 
 // Función para realizar la conversión
 function performConversion(event) {
@@ -84,8 +102,7 @@ function performConversion(event) {
     }
 
     updateResult(result);
-    addToHistory(conversion);
-    conversionHistory.push(conversion);
+    addToHistoryAndLocalStorage(conversion);
 }
 
 // Asociar la función de conversión al evento submit del formulario
