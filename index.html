@@ -1,21 +1,205 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styles.css">
+    <title>Proyecto Javascript</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div>
+                <div>
+                    <a href="index.html">
+                        <img src="./img/logo-y-nombre.png" alt="Money Swap">
+                    </a>
+                </div>
+
+                <div>
+                    <ul>
+                        <li>
+                            <a aria-current="page" href="index.html">Conversor</a>
+                        </li>
+                        <li>
+                            <p>Disabled</p>
+                        </li>
+                        <li>
+                            <p>Disabled</p>
+                        </li>
+                        <li>
+                            <p>Disabled</p>
+                        </li>
+                        <li>
+                            <p>Disabled</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Conversor de Divisas</h1>
+
+        <form>
+            <div>
+                <label for="conversor-de">De:</label>
+                <div>
+                    <select name="moneda-de" id="moneda-1">
+                        <option value="" selected disabled>Seleccioná una moneda</option>
+                        <option value="moneda-ars">ARS pesos argentinos</option>
+                        <option value="moneda-usd">USD dólar estadounidense</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label for="conversor-a">De:</label>
+                <div>
+                    <select name="moneda-a" id="moneda-2">
+                        <option value="" selected disabled>Seleccioná una moneda</option>
+                        <option value="moneda-ars">ARS pesos argentinos</option>
+                        <option value="moneda-usd">USD dólar estadounidense</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label for="monto-de"></label>
+                <div>
+                    <input type="text" id="monto-1" placeholder="2,50">
+                </div>
+            </div>
+
+            <div>
+                <label for="monto-a"></label>
+                <div>
+                    <input type="text" id="monto-2">
+                </div>
+            </div>
+
+            <div>
+                <button type="submit">Convertir</button>
+            </div>
+
+
+        </form>
+
+        <section>
+            <div>
+                <h3>Historial de Conversiones</h3>
+            </div>
+        </section>
+    </main>
+     
+    <footer>
+
+    </footer>
+
+    <script src="./js/main.js"></script>
+</body>
+
+</html> -->
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto Javascript</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <title>Conversor de Divisas</title>
 </head>
 
 <body>
     <header>
+        <nav>
+            <div>
+                <div>
+                    <a href="index.html">
+                        <img src="./img/logo-y-nombre.png" alt="Money Swap">
+                    </a>
+                </div>
 
+                <div>
+                    <ul>
+                        <li>
+                            <a aria-current="page" href="index.html">Conversor</a>
+                        </li>
+                        <li>
+                            <p>Disabled</p>
+                        </li>
+                        <li>
+                            <p>Disabled</p>
+                        </li>
+                        <li>
+                            <p>Disabled</p>
+                        </li>
+                        <li>
+                            <p>Disabled</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </header>
-    <main>
-        <h1>Esto es una página Conversora de Divisas</h1>
-    </main>
-    <footer>
 
+    <main>
+        <h1>Conversor de Divisas</h1>
+
+        <form id="converter-form">
+            <div>
+                <label for="conversor-de">De:</label>
+                <div>
+                    <select name="moneda-de" id="moneda-1">
+                        <option value="" selected disabled>Seleccioná una moneda</option>
+                        <option value="moneda-ars">ARS pesos argentinos</option>
+                        <option value="moneda-usd">USD dólar estadounidense</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label for="conversor-a">A:</label>
+                <div>
+                    <select name="moneda-a" id="moneda-2">
+                        <option value="" selected disabled>Seleccioná una moneda</option>
+                        <option value="moneda-ars">ARS pesos argentinos</option>
+                        <option value="moneda-usd">USD dólar estadounidense</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label for="monto-de">Monto:</label>
+                <div>
+                    <input type="text" id="monto-1" placeholder="2.50">
+                </div>
+            </div>
+
+            <div>
+                <label for="monto-a">Resultado:</label>
+                <div>
+                    <input type="text" id="monto-2" readonly>
+                </div>
+            </div>
+
+            <div>
+                <button type="submit">Convertir</button>
+            </div>
+        </form>
+
+        <section id="historial-section">
+            <div>
+                <h3>Historial de Conversiones</h3>
+            </div>
+        </section>
+    </main>
+
+    <footer>
     </footer>
 
     <script src="./js/main.js"></script>
