@@ -1,6 +1,16 @@
-// Declaración de tasa de cambio actualizada
-const exchangeRateUSDToARS = 547;
-const exchangeRateARSToUSD = 1 / exchangeRateUSDToARS;
+// Declaración de tasas de cambio actualizadas
+const exchangeRates = {
+    "ARS": 283.61,
+    "USD": 1,
+    "EUR": 0.91176,
+    "GBP": 0.78481,
+    "JPY": 143.188,
+    "CAD": 1.34266,
+    "AUD": 1.53101,
+    "CHF": 0.87512,
+    "CNY": 7.20877,
+    "INR": 82.8597
+};
 
 // Referencias a elementos del DOM
 const monedaDeSelect = document.getElementById("moneda-1");
@@ -14,18 +24,6 @@ const swapButton = document.getElementById("swap-button");
 
 // Array para almacenar el historial de conversiones
 let conversionHistory = [];
-
-// Función para realizar la conversión de ARS a USD
-function convertARSToUSD(amountARS) {
-    const amountUSD = amountARS * exchangeRateARSToUSD;
-    return amountUSD.toFixed(2); // Redondeo a 2 decimales
-}
-
-// Función para realizar la conversión de USD a ARS
-function convertUSDToARS(amountUSD) {
-    const amountARS = amountUSD * exchangeRateUSDToARS;
-    return amountARS.toFixed(2); // Redondeo a 2 decimales
-}
 
 // Función para actualizar el resultado en el DOM
 function updateResult(result) {
@@ -100,10 +98,8 @@ function performAutoConversion() {
     const montoDe = parseFloat(montoDeValue);
 
     let result;
-    if (monedaDe === "moneda-ars" && monedaA === "moneda-usd") {
-        result = convertARSToUSD(montoDe);
-    } else if (monedaDe === "moneda-usd" && monedaA === "moneda-ars") {
-        result = convertUSDToARS(montoDe);
+    if (exchangeRates.hasOwnProperty(monedaDe) && exchangeRates.hasOwnProperty(monedaA)) {
+        result = (montoDe / exchangeRates[monedaDe] * exchangeRates[monedaA]).toFixed(2);
     } else {
         result = "Conversión no válida.";
     }
@@ -123,12 +119,9 @@ function saveConversion() {
     let result, conversion;
     if (isNaN(montoDe)) {
         conversion = "Conversión inválida: Ingresa un monto numérico.";
-    } else if (monedaDe === "moneda-ars" && monedaA === "moneda-usd") {
-        result = convertARSToUSD(montoDe);
-        conversion = `${montoDe} ARS equivale a ${result} USD (Dólar Blue).`;
-    } else if (monedaDe === "moneda-usd" && monedaA === "moneda-ars") {
-        result = convertUSDToARS(montoDe);
-        conversion = `${montoDe} USD equivale a ${result} ARS.`;
+    } else if (exchangeRates.hasOwnProperty(monedaDe) && exchangeRates.hasOwnProperty(monedaA)) {
+        result = (montoDe / exchangeRates[monedaDe] * exchangeRates[monedaA]).toFixed(2);
+        conversion = `${montoDe} ${monedaDe} equivale a ${result} ${monedaA}.`;
     } else {
         conversion = "Conversión no válida.";
     }
