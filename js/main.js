@@ -30,6 +30,37 @@ function updateResult(result) {
     montoAInput.value = result !== undefined ? result : "";
 }
 
+// Función para realizar la conversión automáticamente y actualizar el resultado en tiempo real
+function performAutoConversion() {
+    const monedaDe = monedaDeSelect.value;
+    const monedaA = monedaASelect.value;
+    const montoDeValue = montoDeInput.value;
+
+    // Verificar si el campo de monto está vacío
+    if (montoDeValue === "") {
+        updateResult(""); // Dejar el resultado vacío
+        return; // Salir de la función sin hacer la conversión
+    }
+
+    const montoDe = parseFloat(montoDeValue);
+
+    let result;
+    if (exchangeRates.hasOwnProperty(monedaDe) && exchangeRates.hasOwnProperty(monedaA)) {
+        result = (montoDe / exchangeRates[monedaDe] * exchangeRates[monedaA]).toFixed(2);
+    } else {
+        result = "Conversión no válida.";
+    }
+
+    updateResult(result);
+}
+
+// Evento para realizar la conversión automáticamente al cambiar el monto
+montoDeInput.addEventListener("input", performAutoConversion);
+
+// Evento para realizar la conversión automáticamente al cambiar las monedas
+monedaDeSelect.addEventListener("change", performAutoConversion);
+monedaASelect.addEventListener("change", performAutoConversion);
+
 // Función para agregar una conversión al historial y almacenarla en localStorage
 function addToHistoryAndLocalStorage(conversion) {
     conversionHistory.push(conversion);
@@ -82,33 +113,6 @@ swapButton.addEventListener("click", swapCurrencies);
 
 // Al cargar la página, cargar el historial de conversiones desde localStorage
 window.addEventListener("load", loadConversionHistoryFromLocalStorage);
-
-// Función para realizar la conversión automáticamente y actualizar el resultado en tiempo real
-function performAutoConversion() {
-    const monedaDe = monedaDeSelect.value;
-    const monedaA = monedaASelect.value;
-    const montoDeValue = montoDeInput.value;
-
-    // Verificar si el campo de monto está vacío
-    if (montoDeValue === "") {
-        updateResult(""); // Dejar el resultado vacío
-        return; // Salir de la función sin hacer la conversión
-    }
-
-    const montoDe = parseFloat(montoDeValue);
-
-    let result;
-    if (exchangeRates.hasOwnProperty(monedaDe) && exchangeRates.hasOwnProperty(monedaA)) {
-        result = (montoDe / exchangeRates[monedaDe] * exchangeRates[monedaA]).toFixed(2);
-    } else {
-        result = "Conversión no válida.";
-    }
-
-    updateResult(result);
-}
-
-// Evento para realizar la conversión automáticamente
-montoDeInput.addEventListener("input", performAutoConversion);
 
 // Función para guardar la conversión manualmente
 function saveConversion() {
