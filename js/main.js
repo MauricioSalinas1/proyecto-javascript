@@ -89,7 +89,15 @@ window.addEventListener("load", loadConversionHistoryFromLocalStorage);
 function performAutoConversion() {
     const monedaDe = monedaDeSelect.value;
     const monedaA = monedaASelect.value;
-    const montoDe = parseFloat(montoDeInput.value);
+    const montoDeValue = montoDeInput.value;
+
+    // Verificar si el campo de monto está vacío
+    if (montoDeValue === "") {
+        updateResult(""); // Dejar el resultado vacío
+        return; // Salir de la función sin hacer la conversión
+    }
+
+    const montoDe = parseFloat(montoDeValue);
 
     let result;
     if (monedaDe === "moneda-ars" && monedaA === "moneda-usd") {
