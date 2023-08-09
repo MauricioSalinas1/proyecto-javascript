@@ -9,6 +9,8 @@ const montoDeInput = document.getElementById("monto-1");
 const montoAInput = document.getElementById("monto-2");
 const form = document.getElementById("converter-form");
 const historialSection = document.getElementById("historial-section");
+const saveButton = document.getElementById("save-conversion");
+const swapButton = document.getElementById("swap-button");
 
 // Array para almacenar el historial de conversiones
 let conversionHistory = [];
@@ -16,13 +18,13 @@ let conversionHistory = [];
 // Función para realizar la conversión de ARS a USD
 function convertARSToUSD(amountARS) {
     const amountUSD = amountARS * exchangeRateARSToUSD;
-    return amountUSD.toFixed(2); // Redondeamos a 2 decimales
+    return amountUSD.toFixed(2); // Redondeo a 2 decimales
 }
 
 // Función para realizar la conversión de USD a ARS
 function convertUSDToARS(amountUSD) {
     const amountARS = amountUSD * exchangeRateUSDToARS;
-    return amountARS.toFixed(2); // Redondeamos a 2 decimales
+    return amountARS.toFixed(2); // Redondeo a 2 decimales
 }
 
 // Función para actualizar el resultado en el DOM
@@ -54,13 +56,17 @@ function loadConversionHistoryFromLocalStorage() {
 
 // Función para intercambiar las monedas seleccionadas
 function swapCurrencies() {
-    const moneda1 = document.getElementById("moneda-1");
-    const moneda2 = document.getElementById("moneda-2");
+    const moneda1 = monedaDeSelect.value;
+    const moneda2 = monedaASelect.value;
 
-    const tempValue = moneda1.value;
-    moneda1.value = moneda2.value;
-    moneda2.value = tempValue;
+    monedaDeSelect.value = moneda2;
+    monedaASelect.value = moneda1;
+
+    performAutoConversion(); // Actualizar la conversión automáticamente
 }
+
+// Asociar la función de intercambio al evento click del botón "Intercambiar monedas"
+swapButton.addEventListener("click", swapCurrencies);
 
 // Función para borrar el historial de conversiones y removerlo de localStorage
 function clearConversionHistory() {
@@ -69,23 +75,39 @@ function clearConversionHistory() {
     localStorage.removeItem('conversionHistory');
 }
 
-// Referencia al botón de borrar historial
-const clearButton = document.getElementById("clear-history");
-
 // Evento para el botón de borrar historial
+const clearButton = document.getElementById("clear-history");
 clearButton.addEventListener("click", clearConversionHistory);
 
 // Evento para el botón de intercambio
-const swapButton = document.getElementById("swap-button");
 swapButton.addEventListener("click", swapCurrencies);
 
 // Al cargar la página, cargar el historial de conversiones desde localStorage
 window.addEventListener("load", loadConversionHistoryFromLocalStorage);
 
-// Función para realizar la conversión
-function performConversion(event) {
-    event.preventDefault();
+// Función para realizar la conversión automáticamente y actualizar el resultado en tiempo real
+function performAutoConversion() {
+    const monedaDe = monedaDeSelect.value;
+    const monedaA = monedaASelect.value;
+    const montoDe = parseFloat(montoDeInput.value);
 
+    let result;
+    if (monedaDe === "moneda-ars" && monedaA === "moneda-usd") {
+        result = convertARSToUSD(montoDe);
+    } else if (monedaDe === "moneda-usd" && monedaA === "moneda-ars") {
+        result = convertUSDToARS(montoDe);
+    } else {
+        result = "Conversión no válida.";
+    }
+
+    updateResult(result);
+}
+
+// Evento para realizar la conversión automáticamente
+montoDeInput.addEventListener("input", performAutoConversion);
+
+// Función para guardar la conversión manualmente
+function saveConversion() {
     const monedaDe = monedaDeSelect.value;
     const monedaA = monedaASelect.value;
     const montoDe = parseFloat(montoDeInput.value);
@@ -105,5 +127,5 @@ function performConversion(event) {
     addToHistoryAndLocalStorage(conversion);
 }
 
-// Asociar la función de conversión al evento submit del formulario
-form.addEventListener("submit", performConversion);
+// Evento para el botón de "Guardar Conversión"
+saveButton.addEventListener("click", saveConversion);
