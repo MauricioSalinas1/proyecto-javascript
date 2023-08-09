@@ -1,4 +1,4 @@
-// Declaración de tasa de cambio actualizada (Aca utilice la tasa de cambio al dia de hoy y tomando el valor del Dolar Blue y no del Dolar Oficial: 1 USD = 547 ARS)
+// Declaración de tasa de cambio actualizada
 const exchangeRateUSDToARS = 547;
 const exchangeRateARSToUSD = 1 / exchangeRateUSDToARS;
 
@@ -29,7 +29,7 @@ function convertUSDToARS(amountUSD) {
 
 // Función para actualizar el resultado en el DOM
 function updateResult(result) {
-    montoAInput.value = result;
+    montoAInput.value = result !== undefined ? result : "";
 }
 
 // Función para agregar una conversión al historial y almacenarla en localStorage
@@ -121,7 +121,9 @@ function saveConversion() {
     const montoDe = parseFloat(montoDeInput.value);
 
     let result, conversion;
-    if (monedaDe === "moneda-ars" && monedaA === "moneda-usd") {
+    if (isNaN(montoDe)) {
+        conversion = "Conversión inválida: Ingresa un monto numérico.";
+    } else if (monedaDe === "moneda-ars" && monedaA === "moneda-usd") {
         result = convertARSToUSD(montoDe);
         conversion = `${montoDe} ARS equivale a ${result} USD (Dólar Blue).`;
     } else if (monedaDe === "moneda-usd" && monedaA === "moneda-ars") {
