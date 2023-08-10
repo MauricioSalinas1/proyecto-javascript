@@ -1,0 +1,56 @@
+$color-verde: #399B53;
+$color-gris: #EBEBEB;
+$color-negro: #040404;
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration-line: none;
+}
+
+ol,
+ul {
+    list-style: none;
+    margin: 0;
+}
+
+hr {
+    margin: 0;
+    border: 1;
+}
+
+h3 {
+    margin: 0;
+}
+
+a:visited {
+    color: inherit
+}
+
+a.no-visited:visited {
+    color: inherit
+}
+
+a {
+    text-decoration-line: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.oculto {
+    display: none;
+}
+
+.bg-gris {
+    background-color: $color-gris;
+}
+
+.padding-0 {
+    padding: 0px;
+}
+
+.subrayado {
+    text-decoration-line: underline;
+}
