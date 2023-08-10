@@ -2,6 +2,27 @@ $color-verde: #399B53;
 $color-gris: #EBEBEB;
 $color-negro: #040404;
 
+@mixin flexbox($justify: center, $align: center) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin ls-400 {
+    font-family: 'League Spartan';
+    font-weight: 400;
+}
+
+@mixin ls-500 {
+    font-family: 'League Spartan';
+    font-weight: 500;
+}
+
+@mixin ls-600 {
+    font-family: 'League Spartan';
+    font-weight: 600;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -53,4 +74,44 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .subrayado {
     text-decoration-line: underline;
+}
+
+.contenedor-titulo-pag {
+    display: flex;
+    justify-content: left;
+    padding: 50px 20px;
+    margin: 0 auto;
+}
+
+.titulo-pag {
+    @include ls-600;
+    font-size: 2.5rem;
+    text-align: left;
+    color: $color-negro;
+
+    &-secundario {
+        font-size: 2.25rem;
+        padding: 0px 20px 0px;
+    }
+}
+
+@media (min-width: 480px) {
+
+    .main__titulo {
+        padding: 50px 40px;
+    }
+}
+
+@media (min-width: 768px) {
+
+    .contenedor-titulo-pag {
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 992px) {
+
+    .contenedor-titulo-pag {
+        max-width: 960px;
+    }
 }

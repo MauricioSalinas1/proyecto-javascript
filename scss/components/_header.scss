@@ -1,12 +1,10 @@
 .navbar-nav {
+    @include ls-400;
+    font-size: 1.25rem;
     --bs-nav-link-hover-color: #FFFFFF;
     transition-duration: 2s;
     transition-property: all;
     transition-delay: 2s;
-}
-
-.disabled {
-    color: red;
 }
 
 .nav-link[aria-current="page"] {

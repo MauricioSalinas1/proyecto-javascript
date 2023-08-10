@@ -51,15 +51,48 @@ input[type=number]::-webkit-inner-spin-button {
   text-decoration-line: underline;
 }
 
+.contenedor-titulo-pag {
+  display: flex;
+  justify-content: left;
+  padding: 50px 20px;
+  margin: 0 auto;
+}
+
+.titulo-pag {
+  font-family: "League Spartan";
+  font-weight: 600;
+  font-size: 2.5rem;
+  text-align: left;
+  color: #040404;
+}
+.titulo-pag-secundario {
+  font-size: 2.25rem;
+  padding: 0px 20px 0px;
+}
+
+@media (min-width: 480px) {
+  .main__titulo {
+    padding: 50px 40px;
+  }
+}
+@media (min-width: 768px) {
+  .contenedor-titulo-pag {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .contenedor-titulo-pag {
+    max-width: 960px;
+  }
+}
 .navbar-nav {
+  font-family: "League Spartan";
+  font-weight: 400;
+  font-size: 1.25rem;
   --bs-nav-link-hover-color: #FFFFFF;
   transition-duration: 2s;
   transition-property: all;
   transition-delay: 2s;
-}
-
-.disabled {
-  color: red;
 }
 
 .nav-link[aria-current=page] {
@@ -74,6 +107,69 @@ input[type=number]::-webkit-inner-spin-button {
 
 .nav-item:hover {
   text-decoration: underline;
+}
+
+.btn-borrar {
+  color: red;
+  padding: 0px;
+  border: 0px;
+  background-color: inherit;
+}
+
+.conversor {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 6fr 1fr 6fr;
+  padding: 0px 20px 50px;
+  max-width: 540px;
+  margin: 0 auto;
+  background-color: #EBEBEB;
+}
+.conversor-label {
+  font-family: "League Spartan";
+  font-weight: 400;
+  font-size: 1.375rem;
+}
+.conversor-monto {
+  grid-column: 1/2;
+}
+.conversor-resultado {
+  grid-column: 3/4;
+}
+.conversor-guardar {
+  grid-column: 1/4;
+}
+
+@media (min-width: 480px) {
+  .conversor {
+    border-radius: 25px;
+    padding: 20px 0px;
+  }
+}
+@media (min-width: 768px) {
+  .conversor {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .conversor {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .conversor {
+    max-width: 1140px;
+  }
+}
+.section-conversor {
+  padding: 0px 0px 50px;
+}
+
+.svg-borrar {
+  margin: 0px 10px 5px 0px;
+  width: 18px;
+  height: 21px;
+  fill: red;
 }
 
 /*# sourceMappingURL=styles.css.map */
