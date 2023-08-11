@@ -67,6 +67,7 @@ function addToHistoryAndLocalStorage(conversion) {
     localStorage.setItem('conversionHistory', JSON.stringify(conversionHistory));
     const historyItem = document.createElement("p");
     historyItem.textContent = conversion;
+    historyItem.classList.add("historial-texto1");
     historialSection.appendChild(historyItem);
 }
 
@@ -78,6 +79,7 @@ function loadConversionHistoryFromLocalStorage() {
         conversionHistory.forEach(conversion => {
             const historyItem = document.createElement("p");
             historyItem.textContent = conversion;
+            historyItem.classList.add("historial-texto1");
             historialSection.appendChild(historyItem);
         });
     }
@@ -125,7 +127,7 @@ function saveConversion() {
         conversion = "Conversión inválida: Ingresa un monto numérico.";
     } else if (exchangeRates.hasOwnProperty(monedaDe) && exchangeRates.hasOwnProperty(monedaA)) {
         result = (montoDe / exchangeRates[monedaDe] * exchangeRates[monedaA]).toFixed(2);
-        conversion = `${montoDe} ${monedaDe} equivale a ${result} ${monedaA}.`;
+        conversion = `${montoDe} ${monedaDe} = ${result} ${monedaA}.`;
     } else {
         conversion = "Conversión no válida.";
     }

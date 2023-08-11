@@ -2,9 +2,36 @@
     padding: 0px 0px 50px;
 }
 
-.svg-borrar {
-    margin: 0px 10px 5px 0px;
-    width: 18px;
-    height: 21px;
-    fill: red;
+.section-historial {
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    padding: 50px 20px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+
+    .section-historial {
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 992px) {
+
+    .section-historial {
+        max-width: 960px;
+    }
+}
+
+.historial-texto1 {
+    @include ls-400;
+    color: $color-negro;
+    font-size: 1.5rem;
+}
+
+.historial-texto2 {
+    @include ls-500;
+    color: $color-verde;
+    font-size: 1.75rem;
 }

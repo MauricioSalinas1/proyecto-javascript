@@ -1,6 +1,41 @@
+.btn-guardar {
+    border: 0px;
+    background-color: $color-verde;
+    @include ls-400;
+    font-size: 1.25rem;
+    color: #FFFFFF;
+    border-radius: 24px;
+    padding: 5px 20px 2px;
+
+    &-contenedor {
+        grid-column: 1/4;
+        padding: 30px 0px 10px;
+    }
+}
+
 .btn-borrar {
-    color: red;
     padding: 0px;
     border: 0px;
     background-color: inherit;
+    width: 18px;
+    height: 21px;
+}
+
+.svg-borrar {
+    margin: 9px 0px 0px 0px;
+    width: 18px;
+    height: 21px;
+    fill: $color-negro;
+}
+
+.btn-intercambiar {
+    border: 0px;
+    background-color: inherit;
+    margin: 40px 0px 0px;
+}
+
+.svg-intercambiar {
+    width: 31px;
+    height: 36px;
+    fill: $color-verde;
 }
