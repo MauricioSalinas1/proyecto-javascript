@@ -60,7 +60,7 @@ montoDeInput.addEventListener("input", performAutoConversion);
 monedaDeSelect.addEventListener("change", performAutoConversion);
 monedaASelect.addEventListener("change", performAutoConversion);
 
-// Función para agregar una conversión al historial y almacenarla en localStorage
+/// Función para agregar una conversión al historial y almacenarla en localStorage
 function addToHistoryAndLocalStorage(conversion) {
     if (conversion) {
         conversionHistory.push(conversion);
@@ -78,15 +78,14 @@ function addToHistoryAndLocalStorage(conversion) {
         texto1.textContent = conversionInfo;
         texto1.classList.add("historial-texto1");
 
-        const igualSigno = document.createElement("span");
-        igualSigno.textContent = " = ";
-        igualSigno.classList.add("historial-texto1");
-
         const texto2 = document.createElement("span");
         texto2.textContent = resultInfo;
         texto2.classList.add("historial-texto2");
 
-        if (conversionInfo !== "Conversión no válida.") {
+        if (conversionInfo.indexOf("Conversión no válida") === -1) {
+            const igualSigno = document.createElement("span");
+            igualSigno.textContent = " = ";
+            igualSigno.classList.add("historial-texto1");
             historyItem.appendChild(texto1);
             historyItem.appendChild(igualSigno);
             historyItem.appendChild(texto2);
@@ -110,7 +109,7 @@ function loadConversionHistoryFromLocalStorage() {
 
 // Función para renderizar el historial de conversiones en el DOM
 function renderConversionHistory() {
-    historialSection.innerHTML = ''; // Limpiar el historial actual
+    historialSection.innerHTML = '';
 
     conversionHistory.forEach(conversion => {
         const historyItem = document.createElement("p");
