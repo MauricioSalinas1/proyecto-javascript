@@ -162,7 +162,30 @@ function clearConversionHistory() {
 
 // Evento para el botón de borrar historial
 const clearButton = document.getElementById("clear-history");
-clearButton.addEventListener("click", clearConversionHistory);
+clearButton.addEventListener("click", () => {
+    // Mostrar una alerta de confirmación
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: 'Se borrará todo el historial de conversiones. Esta acción no se puede deshacer.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, borrar historial',
+        cancelButtonText: 'Cancelar',
+        cancelButtonColor: '#d33',
+        confirmButtonColor: '#399B53',
+    }).then((result) => {
+        // Si el usuario confirma, borrar el historial
+        if (result.isConfirmed) {
+            clearConversionHistory();
+            Swal.fire({
+                icon: 'success',
+                iconColor: '#399B53',
+                title: 'Historial borrado',
+                text: 'El historial de conversiones ha sido borrado correctamente.',
+            });
+        }
+    });
+});
 
 // Evento para el botón de intercambio
 swapButton.addEventListener("click", swapCurrencies);
@@ -186,6 +209,17 @@ function saveConversion() {
     } else {
         result = (montoDe / exchangeRates[monedaDe] * exchangeRates[monedaA]).toFixed(2);
         conversion = `${montoDe} ${monedaDe} = ${result} ${monedaA}.`;
+
+        // Mostrar notificación con Toastify JS
+        Toastify({
+            text: 'La conversión se guardó correctamente.',
+            backgroundColor: '#399B53',
+            duration: 3000,
+            gravity: 'bottom',
+            position: 'right',
+            close: true,
+            className: 'custom-toastify-text'
+        }).showToast();
     }
 
     updateResult(result);
