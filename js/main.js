@@ -1,17 +1,3 @@
-// Declaración de tasas de cambio actualizadas
-const exchangeRates = {
-    "ARS": 283.61,
-    "USD": 1,
-    "EUR": 0.91176,
-    "GBP": 0.78481,
-    "JPY": 143.188,
-    "CAD": 1.34266,
-    "AUD": 1.53101,
-    "CHF": 0.87512,
-    "CNY": 7.20877,
-    "INR": 82.8597
-};
-
 // Referencias a elementos del DOM
 const monedaDeSelect = document.getElementById("moneda-1");
 const monedaASelect = document.getElementById("moneda-2");
@@ -53,6 +39,23 @@ function performAutoConversion() {
     updateResult(result);
 }
 
+// Función para cargar las tasas de cambio desde la API
+async function fetchExchangeRates() {
+    const appId = "93136d5f504e4a4a9483ee1291082750";
+    const apiUrl = `https://openexchangerates.org/api/latest.json?app_id=${appId}`;
+
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        exchangeRates = data.rates;
+
+        // Llamar a la función para realizar la conversión automáticamente
+        performAutoConversion();
+    } catch (error) {
+        console.error("Error al obtener las tasas de cambio:", error);
+    }
+}
+
 // Evento para realizar la conversión automáticamente al cambiar el monto
 montoDeInput.addEventListener("input", performAutoConversion);
 
@@ -60,7 +63,7 @@ montoDeInput.addEventListener("input", performAutoConversion);
 monedaDeSelect.addEventListener("change", performAutoConversion);
 monedaASelect.addEventListener("change", performAutoConversion);
 
-/// Función para agregar una conversión al historial y almacenarla en localStorage
+// Función para agregar una conversión al historial y almacenarla en localStorage
 function addToHistoryAndLocalStorage(conversion) {
     if (conversion) {
         conversionHistory.push(conversion);
@@ -192,6 +195,9 @@ swapButton.addEventListener("click", swapCurrencies);
 
 // Al cargar la página, cargar el historial de conversiones desde localStorage
 window.addEventListener("load", loadConversionHistoryFromLocalStorage);
+
+// Llamar a la función para cargar las tasas de cambio desde la API al cargar la página
+window.addEventListener("load", fetchExchangeRates);
 
 /// Función para guardar la conversión manualmente
 function saveConversion() {
